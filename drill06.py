@@ -10,8 +10,7 @@ hand_arrow = load_image('hand_arrow.png')
 def handle_events():
     global running
     global x, y
-    global click
-    global cl_x, cl_y
+    global click_positions
 
     events = get_events()
     for event in events:
@@ -19,26 +18,26 @@ def handle_events():
             running = False
         elif event.type == SDL_MOUSEMOTION:
             x, y = event.x, TUK_HEIGHT - 1 - event.y
-        elif event. type == SDL_MOUSEBUTTONDOWN:
-            click = True
-            cl_x, cl_y = event.x, TUK_HEIGHT - 1 - event.y
+        elif event.type == SDL_MOUSEBUTTONDOWN:
+            if event.button == SDL_BUTTON_LEFT:
+                click_positions.append((event.x, TUK_HEIGHT - 1 - event.y))
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
+
 running = True
-click = False
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
-cl_x, cl_y = 0, 0
 frame = 0
+click_positions = []
 hide_cursor()
 
 while running:
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, TUK_WIDTH//2, TUK_HEIGHT//2)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, TUK_WIDTH // 2, TUK_HEIGHT // 2)
     hand_arrow.draw(x, y)
 
-    if click:
+    for cl_x, cl_y in click_positions:
         hand_arrow.draw(cl_x, cl_y)
 
     update_canvas()
