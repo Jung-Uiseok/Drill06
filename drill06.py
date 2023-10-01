@@ -18,9 +18,6 @@ def handle_events():
             x, y = event.x, TUK_HEIGHT - 1 - event.y
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
-    pass
-
-
 
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
@@ -30,7 +27,7 @@ hide_cursor()
 while running:
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    #character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, TUK_WIDTH//2, TUK_HEIGHT//2)
     hand_arrow.draw(x, y)
     update_canvas()
     frame = (frame + 1) % 8
