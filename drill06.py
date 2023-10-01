@@ -24,7 +24,6 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
-
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
@@ -32,13 +31,16 @@ click_positions = []
 hide_cursor()
 
 while running:
+
     clear_canvas()
+
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    hand_arrow.draw(x, y)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, TUK_WIDTH // 2, TUK_HEIGHT // 2, 200, 200)
 
     for cl_x, cl_y in click_positions:
         hand_arrow.draw(cl_x, cl_y)
+
+    hand_arrow.draw(x,y)
 
     update_canvas()
     frame = (frame + 1) % 8
